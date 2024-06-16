@@ -27,8 +27,8 @@ body {
   grid-column-gap: 1rem;
   grid-template-areas: 'input button';
 
-  animation-name: slide-up;
-  animation-duration: 5s;
+  animation-name: slide-up, shake;
+  animation-duration: 3s;
 
   --color: var(--color-gray);
   &:focus-within {
@@ -42,16 +42,6 @@ body {
 }
 
 
-@keyframes slide-up {
-  0% {
-    transform: translateX(50vw);
-  }
-
-  100%{
-    transform: translateY(50px) translateX(50vw);
-  
-  }
-}
 
 .ui-input {
   grid-area: input;
@@ -60,7 +50,12 @@ body {
   border: 2px solid var(--color);
   border-radius: 0.25rem;
   outline: none;
-  transition: inherit;
+  transition: border-color var(--transition-duration) var(--transition-easing);
+  animation-name: slide-up;
+  animation-duration: 0.8s;
+  animation-delay: 1.5s;
+  animation-fill-mode: backwards;
+  
 }
 
 .ui-button {
@@ -73,6 +68,12 @@ body {
   height: var(--input-height);
   background-color: var(--color);
   transition: inherit;
+  transition: background-color var(--transition-duration) var(--transition-easing);
+  animation-name: slide-up;
+  animation-duration: 0.8s;
+  animation-delay: 1.5s;
+  animation-fill-mode: backwards;
+  cursor: pointer;
 }
 
 [data-show]:not([data-active]) {
@@ -84,9 +85,26 @@ body {
 }
 
 @keyframes slide-up {
-  // Add keyframes here
+  from {
+    transform: translateY(20vw);
+    opacity: 0;
+  } 
+
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes shake {
-  // Add a shake animation here
+  from {
+    transform: translateX(0);
+    animation-delay: 1.5s;
+  }
+  50% {
+    transform: translateX(5vw);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
